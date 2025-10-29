@@ -19,8 +19,21 @@ _Then I noticed another bug ..._
 
 ## Exercise 2
 
-[[Your answer goes here!]]
+-- File "/Users/meganclapinski/Downloads/SPD-2.3-Debugging-Techniques-Lab-main/exercise-2/app.py", line 52, in results
+    'city': result_json['name'],
+-- File "/Users/meganclapinski/Downloads/SPD-2.3-Debugging-Techniques-Lab-main/exercise-2/app.py", line 54, in results
+    'temp': result_json['main']['temperature'],
+    KeyError: 'temperature' 
+
+
+-- The first error I got was a KeyError : 'name' on line 52. I decided to trace backwards and work throguh ecah line of code before the error took place. I found that when requesting the city and units, that we were calling from an unknown variable. I changed those to match the name of the input. After that I still got the same error. So at this point I decided to look at the API docuimentation, check that params were correct in order to call the correct API calls. I saw that for cities the pararmeter used is q. So i changed 'place' to 'q' in the params. I then got another KeyError with 'temperature', I looked up the API documentation again and saw that the JSON calls temp and not temperature 
 
 ## Exercise 3
 
-[[Your answer goes here!]]
+Errors: 
+IndexError: list index out of range
+TypeError: list indices must be integers or slices, not float
+
+
+Answer : 
+    - The error is from line 37 from utils.py saying list index out of range. I traced backwords and saw that we were satrting from the leftt index with I on the right side which would go out of bounds. My next error was TypeError: list indices must be integers or slices, not float. An integer is being sent as a flot. So I go from my error line and work backwards to see the math done before the arugment. I saw that we are using the division sign '/' which returns the value as a float. I changed that to floor division // 
